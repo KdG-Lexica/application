@@ -18,6 +18,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
   document-service:
     build: ./document-service
     restart: always
@@ -25,7 +26,6 @@ services:
     environment:
       production: 'yes'
     depends_on:
-
       - "mysql"
       - "mongodb"
   web-client:
