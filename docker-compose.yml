@@ -25,10 +25,6 @@ services:
     env_file: .env
     environment:
       production: 'yes'
-      MONGO_URL: mongodb://mongodb:27017
-      MONGO_DB_NAME: ${MONGO_DB_NAME}
-      MONGO_USERNAME: ${MYSQL_USER}
-      MONGO_PASSWORD: ${MONGO_USERNAME}
     depends_on:
       - "mysql"
       - "mongodb"
