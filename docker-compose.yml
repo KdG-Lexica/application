@@ -23,8 +23,9 @@ services:
     restart: always
     env_file: .env
     enviroment:
-     - production: 'yes'
+      production: 'yes'
     depends_on:
+    
       - "mysql"
       - "mongodb"
   web-client:
