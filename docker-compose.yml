@@ -22,6 +22,8 @@ services:
     build: ./document-service
     restart: always
     env_file: .env
+    enviroment:
+     - production: 'yes'
     depends_on:
       - "mysql"
       - "mongodb"
