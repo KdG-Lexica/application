@@ -1,11 +1,47 @@
+version: 3
 services:
-  db:
+  mysql:
     image: mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: lexica
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
-  api:
-    image: 
+  mongodb:
+    image: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+  document-service:
+    build: ./document-service
+    restart: always
+    env_file: .env
+    depends_on:
+      - "mysql"
+      - "mongodb"
+  web-client:
+    build: ./web-client
+    volumes:
+      - ./application-data/html:/app
+    restart: always
+    ports:
+      - '80'
+  nginx:
+    build: .
+  ssl-gateway:
+    image: valian/docker-nginx-auto-ssl
+    restart: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./application-data:/etc/resty-auto-ssl
+    environment:
+      ALLOWED_DOMAINS: ${HOSTNAME}
+      SITES: '${HOSTNAME}=nginx:80'
