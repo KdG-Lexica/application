@@ -45,4 +45,3 @@ services:
       - ./application-data:/etc/resty-auto-ssl
     environment:
       ALLOWED_DOMAINS: ${HOSTNAME}
-      SITES: '${HOSTNAME}=nginx:80'
