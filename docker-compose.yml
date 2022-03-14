@@ -22,7 +22,7 @@ services:
     build: ./document-service
     restart: always
     env_file: .env
-    enviroment:
+    environment:
       production: 'yes'
     depends_on:
 
