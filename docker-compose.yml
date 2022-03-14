@@ -25,13 +25,11 @@ services:
     enviroment:
       production: 'yes'
     depends_on:
-    
+
       - "mysql"
       - "mongodb"
   web-client:
     build: ./web-client
-    volumes:
-      - ./application-data/html:/app
     restart: always
     ports:
       - '80'
@@ -43,6 +41,6 @@ services:
       - 443:443
     volumes:
       - ./nginx/:/etc/nginx/conf.d/
-      - ./application-data:/etc/resty-auto-ssl
+      - ./application-data/ssl-data:/etc/resty-auto-ssl
     environment:
       ALLOWED_DOMAINS: ${HOSTNAME}
