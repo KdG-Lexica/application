@@ -1,0 +1,6 @@
+[submodule "document-service"]
+	path = document-service
+	url = https://github.com/KdG-Lexica/document-service.git
+[submodule "web-client"]
+	path = web-client
+	url = https://github.com/KdG-Lexica/web-client.git
