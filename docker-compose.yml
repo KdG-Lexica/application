@@ -32,8 +32,6 @@ services:
     restart: always
     ports:
       - '80'
-  nginx:
-    build: .
   ssl-gateway:
     image: valian/docker-nginx-auto-ssl
     restart: on-failure
@@ -41,6 +39,7 @@ services:
       - 80:80
       - 443:443
     volumes:
+      - ./nginx/:/etc/nginx/conf.d/
       - ./application-data:/etc/resty-auto-ssl
     environment:
       ALLOWED_DOMAINS: ${HOSTNAME}
